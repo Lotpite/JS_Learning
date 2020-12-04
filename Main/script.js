@@ -1,5 +1,38 @@
+//Lesson 6 - IF/ESLE/Ternar op/Switch
 "use strict";
 
+if (4 == 5) {
+    console.log('Ok!');
+} else {
+    console.log('Nok!');
+}
+
+const num = 49;
+
+if (num < 49) {
+    console.log('Error');
+} else if (num > 100) {
+    console.log('Too much');
+} else {
+    console.log('Norm');
+}
+
+(num === 50) ? console.log('Ok!') : console.log('Nok!');
+
+switch (num) {
+    case 49:
+        console.log('To low');
+        break;
+    case 100:
+        console.log('too much');
+        break;
+    case 50:
+        console.log('V tochku');
+        break;
+    default: // если кейса не срабатывает то
+        console.log('no again');
+        break;
+}
 
 /*Lesson 5
 "use strict";
