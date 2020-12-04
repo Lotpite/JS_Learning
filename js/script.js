@@ -1,4 +1,7 @@
-//Lesson 5
+"use strict";
+
+
+/*Lesson 5
 "use strict";
 
 let PreFixIncrement = 10,
@@ -26,7 +29,7 @@ const isChecked = false,
       isClosed = false;
 
       console.log(isChecked || isClosed);
-
+*/
 
 /* Lesson 4
 "use strict";
@@ -60,7 +63,7 @@ const answers = [];
 console.log(typeof(answers));
 */
 
-/*Lesson 2
+/*Lesson 2 Objects
 "use strict";
 
 let anumber = 4.6;
