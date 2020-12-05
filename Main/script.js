@@ -1,4 +1,33 @@
-//Lesson 6 - IF/ESLE/Ternar op/Switch
+//Lesson 8
+"use strict";
+
+
+/*Lesson 7 - Cycles
+"use strict";
+
+let num = 50;
+
+// while (num <= 55) {
+//     console.log(num);
+//     num++;
+// }
+
+// do {
+//     console.log(num);
+//     num++;
+// }
+// while (num < 55);
+
+for(let i = 1; i < 8; i++) {
+    if (i === 6) {
+        //break;
+        continue;
+    }
+    console.log("Step by", i);
+}
+*/
+
+/*Lesson 6 - IF/ESLE/Ternar op/Switch
 "use strict";
 
 if (4 == 5) {
@@ -33,6 +62,7 @@ switch (num) {
         console.log('no again');
         break;
 }
+*/
 
 /*Lesson 5
 "use strict";
