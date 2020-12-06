@@ -1,6 +1,78 @@
-//Lesson 8
+//Lesson 10 - Functions on practice
 "use strict";
 
+
+
+/*Lesson 9 - Methods and string/number settings
+"use strict";
+
+const str = "test";
+const arr = [1, 2, 5];
+
+console.log(str.length);
+console.log(arr.length);
+
+console.log(str[2]);
+console.log(str.toUpperCase());
+
+const fruit = "sweetty fruit";
+console.log(fruit.indexOf("fruit")); // находит с какого индекса начинается искомое слово
+console.log(fruit.indexOf("q")); // возвращает -1 если буква не найдена
+
+const logg = "hello wor";
+
+console.log(logg.slice(0, 4)); // 0, 4(4 не включается) - диапазон для вырезания
+
+console.log(logg.substring(0, 4));
+
+console.log(logg.substr(0, 4)); // 4 - количество символов
+
+const kokosh = 12.6;
+console.log(Math.round(kokosh));
+
+const test1 = "12.9px";
+console.log(parseInt(test1));
+console.log(parseFloat(test1));
+*/
+
+/*Lesson 8 - Functions
+"use strict";
+
+let num = 20;
+
+function showFirstMessage(text) {
+    console.log(text);
+    num = 13;
+}
+
+showFirstMessage("Hello world");
+console.log(num);
+
+// function calc (a, b) {
+//     return (a + b);
+// }
+
+// console.log(calc(4, 3));
+// console.log(calc(10, 20));
+
+function ret() {
+    let num = 50;
+    return num;
+}
+
+const anotherNum = ret();
+console.log(anotherNum); 
+
+// Function works only after code before it
+const logger = function() {
+    console.log("gooten tag");
+};
+
+logger();
+
+// Futuristic Function ;-) (without this)
+const calc = (a, b) => a + b;
+*/
 
 /*Lesson 7 - Cycles
 "use strict";
