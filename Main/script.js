@@ -1,6 +1,267 @@
-//Lesson 10 - Functions on practice
+/* Lesson 14 - OOP / PrototypeOP
+
 "use strict";
 
+let str = "some";
+//let strObj = new String(str); // old method
+
+// console.log(typeof(str)); 
+// console.log(typeof(strObj));
+
+//console.dir([1, 2, 3]);
+
+const soldier = {
+    health: 400,
+    armor: 100,
+    sayHello: function() {
+        console.log("Hello");
+    }
+};
+
+const john = {
+    health: 100
+};
+
+//john.__proto__ = soldier; // Старый метод прототипа
+
+
+Object.setPrototypeOf(john, soldier); // новый метод
+console.log(john);
+john.sayHello();
+
+const andrew = Object.create(soldier);
+console.log(andrew.health, andrew.armor);
+andrew.sayHello();
+
+const victor = Object.create(soldier);
+console.log(`Victor armor is: ${victor.armor}`);
+*/
+
+
+/*Lesson 13 - link, Spread
+
+"use strict";
+
+let a = 5,
+    b = a;
+
+b = b + 5;
+
+console.log(b);
+console.log(a);
+
+const obj = {
+    a: 5,
+    b: 1
+};
+
+const copyr = obj; // передается ссылка на obj
+
+copy.a = 10; // модифицируется сам обьект а не copyr
+console.log(copyr);
+console.log(obj);
+
+function copy(mainObj) {
+    let objCopy = {};
+
+    let key;
+    for (key in mainObj) {
+        objCopy[key] = mainObj[key];
+    }
+
+    return objCopy;
+}
+
+const numbers = {
+    a: 2,
+    b: 5,
+    c: {
+        x: 7,
+        y: 4
+    }
+};
+
+const newNumbers = copy(numbers);
+
+newNumbers.a = 10;
+newNumbers.c.x = 10;
+
+console.log(newNumbers);
+console.log(numbers);
+
+const add = {
+    d: 17,
+    e: 20
+};
+
+const clone= Object.assign({}, add);
+
+clone.d = 20;
+console.log(clone);
+console.log(add);
+
+const oldArray = ['a', 'b', 'c'];
+const newArray = oldArray.slice();
+
+newArray[1] = 'Asdasd';
+console.log(newArray);
+console.log(oldArray);
+
+const video = ['youtube', 'vimeo', 'rutube'],
+      blogs = ['wordpress', 'livejournal', 'blogger'],
+      internet = [...video, ...blogs, 'vk', 'fb'];
+
+      console.log(internet);
+
+function log(a, b, c) {
+    console.log(a);
+    console.log(b);
+    console.log(c);
+}
+
+const num = [2, 5, 7];
+
+log(...num);
+
+const array = ["a", "b"];
+
+const newArraya = [...array];
+
+console.log(newArraya);
+
+const objNew = {
+    one: 1,
+    two: 2
+};
+
+const newobjNew = {...objNew};
+
+console.log(newobjNew);
+*/
+
+
+/*Lesson 12 - Arrays / Psevdo-Arrays
+
+"use strict";
+
+const arr = [1, 2, 3, 6, 8];
+
+arr.pop(); // удаляет последние елементы из массива
+
+console.log(arr);
+
+arr.push(13); // добавляет елемент в конец массива
+
+console.log(arr);
+
+for (let i = 0; i < arr.length; i++) {
+    console.log(arr[i], i);
+}
+
+for (let value of arr) {
+    console.log(value);
+}
+console.log ("/////////////////");
+
+arr.forEach(function(item, i, arr) {
+    console.log(`${i}: ${item} inside array ${arr}`);
+});
+
+const str = prompt("", "");
+const products = str.split(", ");
+products.sort();
+console.log(products);
+console.log(products.join('; '));
+
+function compareNum(a, b) {
+    return a - b;
+}
+
+products.sort(compareNum);
+alert(products);
+*/
+
+/*Lesson 11 - Objects / Object methods
+"use strict";
+
+//const obj = new Object();
+
+const options = {
+    name: 'Test',
+    widht: 1024,
+    height: 1024,
+    colors: {
+        border: 'black',
+        bg: 'red'
+    },
+    makeTest: function() {
+        console.log("Draste");
+    }
+};
+
+// console.log(options.name);
+
+// delete options.name;
+
+// console.log(options);
+
+let counter = 0;
+
+for (let key in options) {
+    if (typeof(options[key]) === 'object') {
+        for (let inKey in options[key]) {
+            console.log(`Parametrs ${inKey}, have value ${options[key][inKey]}`);
+            //counter++;
+        }
+    } else {
+        console.log(`Paramets ${key}, have value ${options[key]}`);
+        //counter++;
+    }
+}
+
+//console.log(counter);
+
+//onsole.log(Object.keys(options).length);
+
+options.makeTest();
+
+const {border, bg} = options.colors;
+console.log(border);
+*/
+
+// for (let key of options) { // не переббирает обьекты
+//     console.log(`Paramets ${key}, have value ${options[key]}`);
+// }
+
+
+/*Lesson 10 - Callback functions
+"use strict";
+
+    function first() {
+        // Do something
+        setTimeout(function () {
+            console.log(1);
+        }, 500);
+    }
+
+    function second() {
+        console.log(2);
+    }
+
+    first();
+    second();
+
+    function learnJS(lang, callback) {
+        console.log(`I learn: ${lang}`);
+        callback();
+    }
+
+    function done() {
+        console.log('I PASS this lesson');
+    }
+
+    learnJS('JavaScript', done);
+*/
 
 
 /*Lesson 9 - Methods and string/number settings
