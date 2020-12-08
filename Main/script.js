@@ -1,3 +1,87 @@
+/*Lesson 17 - Exercises on INTERVIEW
+
+"use strict";
+
+// let x = 5; alert(x++); // даст 5. возвращает сначала 5
+// let x = 5; alert(++x); // даст 6. возвращает сначала 6
+
+// [] + false - null + true // 
+// console.log(typeof([] + false)); // "false"
+// console.log(typeof([] + false - null + true)); // NaN
+
+// let y = 1; let x = y = 2; alert(x); // 2 последовательное присваивание
+
+// console.log([] + 1 + 2); // "12"
+
+// alert("1"[0]); // 1
+
+// console.log(2 && 1 && null && 0 && undefined); // null. && запинается на False 
+
+// console.log(!!(a && b) === (a && b)); // false
+
+// alert ( null  || 2 && 3 || 4); // 3 // || запинается на true
+
+// const a = [1, 2, 3]; a == b - false
+// const b = [1, 2, 3];
+
+// alert ( +"Infinity"); // Infinity
+// alert ( +"infinity"); // NaN
+
+// console.log("Ezhyk" > "Yabloko"); // False (look to UNICODE)
+             f   f   2 T   
+// console.log(0 || "" || 2 || undefined || true || false); // 2 код остановился на true и дальше не пошел
+*/
+
+/*Lesson 16 - Dynamic typization
+
+"use strict";
+
+//to string
+console.log(typeof(5 + '')); // конкатинация
+console.log(typeof(null + ''));
+
+const num = 5;
+
+console.log('https://vk.com/catalog/' + num);
+
+const fontSize = 26 + 'px';
+
+//to number
+console.log(typeof(Number('4')));
+
+console.log(typeof(+'54'));
+
+console.log(typeof(parseInt("15px", 10)));
+
+//let answ = +prompt("Hello", "");
+
+//to boolean
+
+//0, '', null, undefined, NaN; - always FALSE
+
+let switcher = null;
+
+if (switcher) {
+    console.log('Working');
+}
+
+switcher =  1;
+if (switcher) {
+    console.log('Working');
+}
+
+console.log(typeof(Boolean('4'))); // boolean
+
+console.log(typeof(!!"44444")); // boolean
+*/
+
+/*Lesson 15 - Catch problems
+
+"use strict";
+
+debugger; // делает брейк поинт в коде
+*/
+
 /* Lesson 14 - OOP / PrototypeOP
 
 "use strict";
