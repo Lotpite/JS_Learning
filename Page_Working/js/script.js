@@ -1,4 +1,6 @@
-//Lesson 2 - 
+
+
+/*Lesson 2 - Change html from javascript
 "use strict";
 
 const  box = document.getElementById('box'),
@@ -52,7 +54,7 @@ div.innerHTML = "<h1>Hello world</h1>"; // можно создавать нов�
 //wrapper.removeChild(hearts[1]);
 //wrapper.replaceChild(circles[0], hearts[0]);
 
-
+*/
 
 
 
