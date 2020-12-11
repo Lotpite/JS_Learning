@@ -1,3 +1,41 @@
+//Lesson 6 - Event on mobile
+
+//touchstart - срабатывает при касание к елементу
+//touchmove - при каждом смещении пальца срабатывает
+//touchend - как только оторвался палец
+//touchenter - нажал вскользь
+//touchleave - ушел за пределы елемента
+//touchcancel - когда палец больше не регистрируется на екране 
+
+ 
+    const box = document.querySelector('.box');
+
+    box.addEventListener('touchstart', (e) =>{
+        e.preventDefault();
+
+        console.log('start');
+        console.log(e.touches);
+        console.log(e.target);
+    });
+
+    box.addEventListener('touchmove', (e) =>{
+        e.preventDefault();
+
+        console.log(e.targetTouches[0].pageX);
+    });
+
+    box.addEventListener('touchend', (e) =>{
+        e.preventDefault();
+
+        console.log('end');
+    });
+
+    // touches - выдает список пальцев на екране
+    // target - выдает список пальце на елементе
+    // changedTouches - список пальцев учавствовали в событии
+
+
+
 /* Lesson 5 - Travelling by DOM
 //console.log(document.body);
 //console.log(document.head);
