@@ -1,6 +1,71 @@
+/* Lesson 5 - Travelling by DOM
+//console.log(document.body);
+//console.log(document.head);
+//console.log(document.documentElement);
+
+//console.log(document.body.childNodes);
+//console.log(document.body.firstChild);
+// console.log(document.body.firstElementChild);
+// console.log(document.body.lastElementChild);
+
+// console.log(document.querySelector('#current').parentNode);
+// console.log(document.querySelector('#current').parentElement);
+
+// console.log(document.querySelector('[data-current="3"]').nextSibling);
+
+// console.log(document.querySelector('[data-current="3"]').nextElementSibling);
+
+for (let node of document.body.childNodes){
+    if(node.nodeName == '#text') {
+        continue;
+    }
+    console.log(node);
+} */
+
+/* Lesson 3 - Events
+"use strict";
+
+const btns = document.querySelectorAll('button'),
+      overlay = document.querySelector('.overlay');
+
+//let i = 0;
+const deleteElement = (event) => {
+    console.log(event.target);
+    console.log(event.type);
+    // i++;
+    // if (i == 1) {
+    //     btn.removeEventListener('click', deleteElement);
+    // }
+};
+
+// btn.onclick  = function() {  GAVNO GAVNO
+//     alert('Kick');
+// };
+
+// btn.addEventListener('click', (event) => {
+//     console.log(event.target);
+//     event.target.remove();
+//     //console.log('Kick');
+// });
+
+// btn.addEventListener('click', deleteElement);
+// overlay.addEventListener('click', deleteElement);
+
+btns.forEach (btn => {
+    btn.addEventListener('click', deleteElement, {once: true});
+});
+
+const link = document.querySelector('a');
+
+link.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    console.log(event.target);
+});
+*/
 
 
-/*Lesson 2 - Change html from javascript
+/* Lesson 2 - Change html from javascript
 "use strict";
 
 const  box = document.getElementById('box'),
@@ -53,7 +118,6 @@ div.innerHTML = "<h1>Hello world</h1>"; // можно создавать нов�
 //wrapper.insertBefore(div, hearts[1]);
 //wrapper.removeChild(hearts[1]);
 //wrapper.replaceChild(circles[0], hearts[0]);
-
 */
 
 

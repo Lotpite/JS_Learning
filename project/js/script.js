@@ -1,8 +1,7 @@
-
 // Метод из урока
 'use strict';
 
-const movieDB = {
+let movieDB = {
     movies: [
         "Веган",
         "Лига справедливости",
@@ -12,59 +11,100 @@ const movieDB = {
     ]
 };
 
-const adv = document.querySelectorAll('.promo__adv img'),
-      poster = document.querySelector('.promo__bg'),
-      genre = document.querySelector('.promo__genre'),
-      moveiList = document.querySelector('.promo__interactive-list');
-console.log(adv);
+const adv = document.querySelectorAll('.promo__adv img'), //рекламный блок с рисунками
+      poster = document.querySelector('.promo__bg'), // класс отвечающий за титул
+      genre = poster.querySelector('.promo__genre'), // класс отвечающий за жанр на титуле promo__bg
+      moviesList = document.querySelector('.promo__interactive-list'), // список фильмов
+      btnAdd = document.querySelector('.add button'), // Кнопка "Подтвердить"
+      textField = document.querySelector('.add input'), // Текстовое поле для ввода названия фильма
+      chBox = document.querySelector('.add input[type=checkbox]'); // Checkbox из класса add "Добавляем любимый фильм"
 
+//Создаем проверку чекбокса "добавляем любимый фильм"
+const makeFilmFavorite = (event) => {
+    if(chBox.checked) {
+        console.log('Adding favorite film');
+    } else {
+        console.log('Adding common film');
+    }
+};
+
+// Создаем считыватель состояния чекбокса "добавляем любимый фильм"
+chBox.addEventListener('click', makeFilmFavorite);
+
+// Создаем функцию удаления фильма
+const deleteFilm = (event) => {
+    event.target.parentNode.remove();
+    let itemList = document.querySelector('.promo__interactive-list');
+    let items = itemList.querySelectorAll('li');
+    movieDB.movies = [];
+    for (let i = 0; i < items.length; i++) {
+        movieDB.movies.push(items[i].innerText.split('.')[1]);
+    }
+    movieDB.movies.sort();
+    createNewFilmList();
+};
+// Создать событие присваивания значения введеного в текстовое поле
+const enterNewFilmName = (event) => {
+    textField.inputValue = event.target.value;
+};
+
+//Создать считыватель значения введеного в текстовое поле
+textField.addEventListener('input', enterNewFilmName);
+
+// Создать событие для кнопки "Потдвердить"
+const addNewFilm = (event) => {
+    event.preventDefault(); // Запрещает перезагружать страницу после нажатия на кнопку
+    let filmName = textField.inputValue;
+    if(filmName != "" && filmName != undefined && filmName != null) {
+        if (filmName.length > 21) {
+            filmName = `${textField.inputValue.slice(0, 21)}...`;
+            movieDB.movies.push(filmName);
+        } else {
+            movieDB.movies.push(filmName);
+            createNewFilmList();
+        }
+    } else {
+        alert("Please enter correct film name");
+    }
+};
+
+// Создать считыватель событий на кнопке "Подтвердить" методом клика
+btnAdd.addEventListener('click', addNewFilm);
+
+// Удалить рекламу
 adv.forEach(item => {
     item.remove();
 });
 
-genre.textContent = 'драма';
+// изменить жанр фильма на титуле     
+genre.textContent = 'драма'; 
 
-poster.style.backgroundImage =  'url("img/bg.jpg")';
+// изменить фоновый рисунок
+poster.style.backgroundImage = 'url("img/bg.jpg")'; 
 
-moveiList.innerHTML = "";
+//............................. Начало функции создания нового списка фильмов    
+function createNewFilmList() { 
 
+//удалить текущий список фильмов 
+moviesList.innerHTML = ""; 
+
+// отсортировать список фильмов по алфавиту
 movieDB.movies.sort();
 
-
+//Создать новый список фильмов
 movieDB.movies.forEach((film, i) => {
-    moveiList.innerHTML += `
-        <li class="promo__interactive-item">${i + 1}. ${film}
-             <div class="delete"></div>
-        </li>
+    moviesList.innerHTML += `
+    <li class="promo__interactive-item">${i + 1}.${film}
+        <div class="delete"></div>
+    </li>
     `;
+    // Для каждого списка <li> создаем функцию для кнопки "Удалить" хранящегося в блоке <div>
+    let btnDell = document.querySelectorAll('.delete'); // класс отвечающий за кнопку "удалить фильм"
+    btnDell.forEach((btn, i) => {
+        btn.addEventListener('click', deleteFilm);
+    });
 });
+}
+//............................. Конец функции создания нового списка фильмов  
 
-// // Сортировка фильмов 
-// movieDB.movies.sort();
-
-// const some = document.querySelector('.promo__adv'), // работает
-//       advImgs = some.getElementsByTagName('img'), // находит рисунки в some как обьект HTML Collection
-//       imgs = some.querySelectorAll('img'), // находит рисунки в виде массива Nodelist
-//       genre = document.querySelector('.promo__genre'),
-//       bgImg = document.querySelector('.promo__bg'),
-//       moviesList = document.querySelector('.promo__interactive-list'),
-//       moviesListLi = moviesList.getElementsByTagName('li');
-
-// // Присвоить новый динамический список и упорядочить по номерам
-//    for (let i = 0; i < moviesListLi.length; i++) {
-//        moviesListLi[i].childNodes[0].textContent = `${i+1}. ${movieDB.movies[i]}`;
-//    }
-
-// // Удалить рекламу от спонсоров (только рисунки)
-//     imgs.forEach(item => {
-//          item.remove();
-//      }); 
-
-// /* Удалить рекламный блок promo__adv
-// some.remove(); */
-
-// // Изменить текст жанра
-// genre.textContent = 'драма';
-
-// // Изменить рисунок
-// bgImg.style = 'background: url(../img/bgImg.jpg) center (center / cover) no-repeat';
+createNewFilmList();
