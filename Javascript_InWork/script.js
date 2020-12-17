@@ -1,6 +1,51 @@
+// const deadLine = '2020.12.15',
+//       now = new Date();
 
 
 
+
+// let timeLeft = Date.parse(deadLine) - Date.parse(now);
+// console.log(timeLeft);
+// let days = Math.floor((timeLeft / ( 1000 * 60 * 60 * 24)));
+// let hours = Math.floor((timeLeft / ( 1000 * 60 ) % 60));6
+// let minutes = Math.floor((timeLeft /  1000) % 60);
+// console.log(days);
+// console.log(hours);
+// console.log(minutes);
+
+
+
+/* Date 
+"use strict";
+
+const now = new Date('2020-05-01');
+//new Date.parse('2020-05-01');
+
+// console.log(now.setHours(21, 40));
+// console.log(now);
+
+let start = new Date();
+
+for (let i = 0; i < 100000; i++)  {
+    let some = i ** 3;
+}
+
+let end = new Date();
+
+alert(`Cicle worked for ${end - start} ms`);
+
+// console.log(now.getFullYear());
+// console.log(now.getMonth());
+// console.log(now.getDate());
+
+// console.log(now.getDay());
+// console.log(now.getHours());
+// console.log(now.getUTCHours());
+
+// console.log(now.getTimezoneOffset());
+// console.log(now.getTime());
+
+*/
 
 /* ClassList
 const btns = document.querySelectorAll('button'),
