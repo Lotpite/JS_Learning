@@ -1,4 +1,4 @@
-//Class
+/* Class
 
 "use strict";
 
@@ -38,7 +38,7 @@ const div = new ColoredRectangleWithText(25, 10, 'Hi world', 'red');
 
 div.showMyProps();
 console.log(div.calcArea());
-
+*/
 
 /* This . Call Context
 
