@@ -110,7 +110,7 @@
 
       setClock('.timer', deadLine);
 
-      /* Modal window
+      // Modal window
 
       const modalTrigger = document.querySelectorAll('[data-modal]'),
           modal = document.querySelector('.modal'),
@@ -159,28 +159,39 @@
       }
 
       window.addEventListener('scroll', showModalByScroll);
-*/
 
-    class MenuCard {
-        constructor(src, alt, title, descr, price, parentSelector) {
-            this.src = src;
-            this.alt = alt;
-            this.title = title;
-            this.descr = descr;
-            this.price = price;
-            this.parent = document.querySelector(parentSelector);
-            this.course = 27.5;
-            this.changeToUAH();
-        }
 
-        changeToUAH() {
-            this.price = this.price * this.course;
-        }
+// Classes in Menu card
 
-        render() {
-            const element = document.createElement('div');
-            element.innerHTML = `
-            <div class="menu__item">
+      // Создаем класс конструктор карточки меню
+      class MenuCard {
+          constructor(src, alt, title, descr, price, parentSelector, ...classes) {
+              this.src = src;
+              this.alt = alt;
+              this.title = title;
+              this.descr = descr;
+              this.price = price;
+              this.classes = classes; //array
+              this.parent = document.querySelector(parentSelector);
+              this.course = 27.5;
+              this.changeToUAH();
+          }
+
+          changeToUAH() {
+              this.price = this.price * this.course;
+          }
+
+          // первращаем с помощью render в HTML
+          render() {
+              const element = document.createElement('div');
+              if (this.classes.length === 0) {
+                  this.element = 'menu__item';
+                  element.classList.add(this.element);
+              } else {
+                this.classes.forEach(className => element.classList.add(className));
+              }
+
+              element.innerHTML = `
             <img src=${this.src} alt=${this.alt}>
             <h3 class="menu__item-subtitle">${this.title}</h3>
             <div class="menu__item-descr">${this.descr}</div>
@@ -189,38 +200,143 @@
                 <div class="menu__item-cost">Цена:</div>
                 <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
             </div>
-        </div>
+        
             `;
-            this.parent.append(element);
-        }
+            // Добавляем блок в конец родительского класса
+              this.parent.append(element);
+          }
+      }
+
+      // Создаем обьекты класса
+      new MenuCard(
+          "img/tabs/vegy.jpg",
+          "vegy",
+          'Меню "Фитнес"',
+          'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+          8,
+          ".menu .container",
+          'menu__item',
+          'big'
+      ).render(); // первращаем с помощью render в HTML
+
+      new MenuCard(
+          "img/tabs/elite.jpg",
+          "elite",
+          'Меню “Премиум”',
+          'Меню "В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
+          20,
+          ".menu .container",
+          'menu__item',
+          
+      ).render();
+
+
+      new MenuCard(
+          "img/tabs/post.jpg",
+          "post",
+          'Меню "Постное"',
+          'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',
+          16,
+          ".menu .container",
+          'menu__item',
+          
+      ).render();
+
+        // Forms
+
+        const forms = document.querySelectorAll('form');
+
+        // создаем обьект с сообщениями (статуса реквеста)
+        const message = {
+            loading: 'loading',
+            success: 'success',
+            failure: 'failure',
+            };
+
+        forms.forEach(form => {
+            postData(form);
+        });
+
+        function postData (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+            const statusMessage = document.createElement('div'); // создаем блок с сообщением
+                statusMessage.classList.add('status'); // добавляем класс к созданному блоку
+                statusMessage.textContent = message.loading; // добавляем отображаемый текст в блок
+                form.append(statusMessage); // Пушим созданный блок в конец form
+
+            // создаем запрос XMLHttpRequest
+            const request = new XMLHttpRequest();
+
+            // формируем запрос (что, куда)
+            request.open('POST', 'server.php');
+
+            // устанавливает заголовок запроса (уточняет детали)
+            request.setRequestHeader('Content-type', 'application/json');
+
+            // создаем FormData которая будет содержать елементы формы
+            const formData = new FormData(form),
+                  formDataObject = {}; // создаем пустой обьект который заполним датой из FormData
+
+                  // заполняем обьект елементами FormData
+            formData.forEach((item, i) => {
+                formDataObject[i] = item;
+            });
+
+            // конвертируем обьект в читабельный для JSON
+            const dataToSend = JSON.stringify(formDataObject);
+
+            // Отправляем запрос сконвертированый обьект
+            request.send(dataToSend);
+
+            // Отслжеиваем статус реквеста 
+            request.addEventListener('load', () => {
+                if (request.status === 200) {
+                    statusMessage.textContent = message.success;
+                } else {
+                    statusMessage.textContent = message.success.failure;
+                }
+            });
+
+            form.reset();
+            
+        });
     }
 
-    new MenuCard(
-        "img/tabs/vegy.jpg",
-        "vegy",
-        'Меню "Фитнес"',
-        'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
-        8,
-        ".menu .container"
-    ).render();
 
-    new MenuCard(
-        "img/tabs/elite.jpg",
-        "elite",
-        'Меню “Премиум”',
-        'Меню "В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
-        20,
-        ".menu .container"
-    ).render();
+      /*  Server.php
+         function postData(form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
 
+                const statusMessage = document.createElement('div');
+                statusMessage.classList.add('status');
+                statusMessage.textContent = message.loading;
+                form.append(statusMessage);
 
-    new MenuCard(
-        "img/tabs/post.jpg",
-        "post",
-        'Меню "Постное"',
-        'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',
-        16,
-        ".menu .container"
-    ).render();
+                const request = new XMLHttpRequest();
+                request.open('POST', 'server.php');
+
+                //request.setRequestHeader('Content-type', 'multipart/form-data');
+                // Заголовок не нужен между обьектом formData
+                const formData = new FormData(form);
+
+                request.send(formData);
+
+                request.addEventListener('load', () => {
+                    if (request.status === 200) {
+                        console.log(request.response);
+                        statusMessage.textContent = message.success;
+                        form.reset();
+                        setTimeout(() => {
+                            statusMessage.remove();
+                        }, 1000);
+                    } else {
+                        statusMessage.textContent = message.failure;
+                    }
+                });
+            });
+        } */
 
   });
