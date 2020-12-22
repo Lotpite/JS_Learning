@@ -113,8 +113,8 @@
       // Modal window
 
       const modalTrigger = document.querySelectorAll('[data-modal]'),
-          modal = document.querySelector('.modal'),
-          modalCloseBtn = document.querySelector('[data-close]');
+          modal = document.querySelector('.modal');
+         // modalCloseBtn = document.querySelector('[data-close]');
 
       function openModal() {
           modal.classList.add('show');
@@ -135,10 +135,10 @@
           });
       });
 
-      modalCloseBtn.addEventListener('click', closeModal);
+      //modalCloseBtn.addEventListener('click', closeModal);
 
       modal.addEventListener('click', (e) => {
-          if (e.target === modal) {
+          if (e.target === modal || e.target.getAttribute('data-close') == '') {
               closeModal();
           }
       });
@@ -248,7 +248,7 @@
 
         // создаем обьект с сообщениями (статуса реквеста)
         const message = {
-            loading: 'loading',
+            loading: 'img/form/spinner.svg',
             success: 'success',
             failure: 'failure',
             };
@@ -261,11 +261,15 @@
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
 
-            const statusMessage = document.createElement('div'); // создаем блок с сообщением
-                statusMessage.classList.add('status'); // добавляем класс к созданному блоку
-                statusMessage.textContent = message.loading; // добавляем отображаемый текст в блок
-                form.append(statusMessage); // Пушим созданный блок в конец form
-
+            const statusMessage = document.createElement('img'); // создаем блок с сообщением
+                statusMessage.src = message.loading; // добавляем класс к созданному блоку
+                statusMessage.style.cssText = ` 
+                    display: block;
+                    margin: 0 auto;
+                `;
+                //statusMessage.textContent = message.loading; // добавляем отображаемый текст в блок
+               // form.append(statusMessage); // Пушим созданный блок в конец form
+                form.insertAdjacentElement('afterend', statusMessage);
             // создаем запрос XMLHttpRequest
             const request = new XMLHttpRequest();
 
@@ -273,7 +277,7 @@
             request.open('POST', 'server.php');
 
             // устанавливает заголовок запроса (уточняет детали)
-            request.setRequestHeader('Content-type', 'application/json');
+            request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 
             // создаем FormData которая будет содержать елементы формы
             const formData = new FormData(form),
@@ -293,15 +297,19 @@
             // Отслжеиваем статус реквеста 
             request.addEventListener('load', () => {
                 if (request.status === 200) {
-                    statusMessage.textContent = message.success;
+                    thanksModal(message.success);
+                    statusMessage.remove();
+                    form.reset();
                 } else {
-                    statusMessage.textContent = message.success.failure;
+                    thanksModal(message.failure);
                 }
             });
 
-            form.reset();
+            
             
         });
+
+
     }
 
 
@@ -337,6 +345,33 @@
                     }
                 });
             });
-        } */
+        } 
+        */
+
+
+        function thanksModal (message) {
+
+            const previousModal = document.querySelector('.modal__dialog');
+            previousModal.classList.add('hide');
+            openModal();
+
+            const newModalDialog = document.createElement('div');
+            newModalDialog.classList.add('modal__dialog');
+            newModalDialog.innerHTML = `
+            <div class="modal__content">
+                <div class="modal__close" data-close>&times;</div>
+                <div class="modal__title">${message}</div>
+            </div>
+            `;
+
+            document.querySelector('.modal').append(newModalDialog);
+
+            setTimeout(() => {
+                newModalDialog.remove();
+                previousModal.classList.add('show');
+                previousModal.classList.remove('hide');
+                closeModal();
+            }, 4000);
+        }
 
   });
