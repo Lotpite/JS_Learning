@@ -1,7 +1,8 @@
 /* Objects simplify
 
  objArray.forEach(object => {
-        const kokos = new MenuCard(object.img, object.altimg, object.title, object.descr, object.price, '.menu .container').render();
+        const kokos = new MenuCard(object.img, object.altimg, object.title,
+             object.descr, object.price, '.menu .container').render();
         console.log(kokos);
       }));
 
