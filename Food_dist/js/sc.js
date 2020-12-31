@@ -1,4 +1,94 @@
+// Incapsulation - defend from user
+'use strict';
 
+// function User(name, age) {
+//     this.name = name;
+//     let userAge = age;
+
+//     this.say = function() {
+//         console.log(`User name: ${this.name}, age: ${userAge}`);
+
+//     };
+
+//     this.getAge = function() {
+//         return userAge;
+//     };
+
+//     this.setAge = function(age) {
+//         if (typeof age === 'number' && age > 0 && age < 110) {
+//             userAge = age;
+//         } else {
+//             console.log('Nedopuistiomoe zhanechenie');
+//         }
+//     };
+
+// }
+
+// const ivan = new User('Ivan', 27);
+// console.log(ivan.name);
+// //console.log(ivan.userAge); // недоступна снаружи - undefined
+// console.log(ivan.getAge());
+
+
+
+// ivan.setAge(100);
+// ivan.setAge(300);
+// console.log(ivan.getAge());
+
+// ivan.say();
+
+class User {
+
+    constructor(name, age) {
+        this.name = name;
+        this._age = age;
+    }
+
+    say() {
+        console.log(`User name: ${this.name}, age: ${this._age}`);
+    }
+
+    get age() {
+        return this._age;
+    }
+
+    set age(age) {
+        if (typeof age === 'number' && age > 0 && age < 110) {
+            this._age = age;
+        } else {
+            console.log('Nedopuistiomoe zhanechenie');
+        }
+    }
+
+}
+
+const ivan = new User('Ivan', 27);
+console.log(ivan.age);
+ivan.age = 99;
+console.log(ivan.age);
+
+ivan.say();
+
+/* Getters and Setters
+'use strict';
+
+const persone = {
+    name: 'Alex',
+    age: 25,
+
+get userAge() {
+    return this.age;
+},
+
+set userAge(number) {
+    this.age = number;
+}
+
+};
+
+console.log(persone.userAge = 30);
+console.log(persone.userAge);
+*/
 
 /* Objects simplify
 
@@ -216,7 +306,7 @@ request.addEventListener('load', () => {
         } 
         */
 
-        /* AJAX
+/* AJAX
 'use strict';
 
 
