@@ -1,8 +1,6 @@
-function timer() {
+function timer(id, deadLine) {
 
 //Timer
-
-const deadLine = '2021.01.25';
 
 function getTimeRemaining(endTime) {
     const total = Date.parse(deadLine) - Date.parse(new Date()),
@@ -52,8 +50,8 @@ function setClock(selector, endTime) {
     }
 }
 
-setClock('.timer', deadLine);
+setClock(id, deadLine);
 
 }
 
-module.exports = timer;
+export default timer;

@@ -1,4 +1,4 @@
-function tabs() {
+function tabs(tabsSelector, tabsContentSelector, tabsParentSelector, acitveClass) {
 
     /*Home Work #1 - Tabs
     - Скрыть неактуальный контент вкладок
@@ -9,9 +9,9 @@ function tabs() {
     .hide{display:none}
     .fade{animation-name: fade; animation-duration: 1.5s;}@keyframes fade{from{opacity: 0.1;}to{opacity: 1;}}
 */
-const tabParent = document.querySelector('.tabheader__items'),
-tabs = document.querySelectorAll('.tabheader__item'),
-tabcontent = document.querySelectorAll('.tabcontent');
+const tabParent = document.querySelector(tabsParentSelector),
+tabs = document.querySelectorAll(tabsSelector),
+tabcontent = document.querySelectorAll(tabsContentSelector);
 
 function hideTabContent() {
 tabcontent.forEach(item => {
@@ -20,7 +20,7 @@ tabcontent.forEach(item => {
     item.classList.remove('show', 'fade');
 });
 tabs.forEach(item => {
-    item.classList.remove('tabheader__item_active');
+    item.classList.remove(acitveClass);
 });
 }
 
@@ -29,7 +29,7 @@ function showTabContent(i = 0) {
 tabcontent[i].classList.add('show', 'fade');
 tabcontent[i].classList.remove('hide');
 
-tabs[i].classList.add('tabheader__item_active');
+tabs[i].classList.add(acitveClass);
 }
 
 tabs.forEach((item, i) => {
@@ -42,7 +42,7 @@ item.addEventListener('click', (event) => {
 tabParent.addEventListener('click', (event) => {
 const target = event.target;
 
-if (target && target.classList.contains('tabheader__item')) {
+if (target && target.classList.contains(tabsSelector.slice(1))) {
     tabs.forEach((item, i) => {
         if (target == item) {
 
@@ -57,4 +57,4 @@ showTabContent();
     
 }
 
-module.exports = tabs;
+export default tabs;

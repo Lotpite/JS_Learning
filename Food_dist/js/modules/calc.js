@@ -117,4 +117,4 @@ calcResult();
 
 }
 
-module.exports = calc;
+export default calc;

@@ -1,3 +1,4 @@
+import {getResource} from '../services/services';
 
 function cards() {
 
@@ -47,9 +48,16 @@ function cards() {
         }
     }
 
+    getResource('http://localhost:3000/menu')
+        .then(data => {
+            data.forEach(({img, altimg, title, descr, price}) => {
+                new MenuCard(img, altimg, title, descr, price, ".menu .container").render();
+            });
+        });
+
     // Create classes Menu Cards
 
-    // axios library request
+    /* axios library request
     axios.get('http://localhost:3000/menu')
         .then(data => {
             data.data.forEach(({
@@ -62,17 +70,11 @@ function cards() {
                 new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
             });
         });
+*/
 
  /* JSON request
 
- const getResource = async (url) => {
-        const result = await fetch(url);
-        if (!result.ok) {
-            throw new Error('Error');
-        } else {
-            return await result.json();
-        }
-    };
+ 
 
     getResource('http://localhost:3000/menu')
         .then(data => {
@@ -84,4 +86,4 @@ function cards() {
 
 }
 
-module.exports = cards;
+export default cards;

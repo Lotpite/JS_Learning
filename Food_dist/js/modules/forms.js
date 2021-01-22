@@ -1,8 +1,11 @@
-function forms() {
+import {openModal, closeModal} from './modal';
+import {postData} from '../services/services';
+
+function forms(formSelector, modalTimerId) {
 
 // Forms
 
-const forms = document.querySelectorAll('form');
+const forms = document.querySelectorAll(formSelector);
 
 // создаем обьект с сообщениями (статуса реквеста)
 const message = {
@@ -14,17 +17,6 @@ const message = {
 forms.forEach(form => {
     bindPostData(form);
 });
-
-const postData = async (url, data) => {
-    const result = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: data
-    });
-    return await result.json();
-};
 
 function bindPostData(form) {
     form.addEventListener('submit', (e) => {
@@ -67,7 +59,7 @@ function thanksModal(message) {
 
     const previousModal = document.querySelector('.modal__dialog');
     previousModal.classList.add('hide');
-    openModal();
+    openModal('.modal', modalTimerId);
 
     const newModalDialog = document.createElement('div');
     newModalDialog.classList.add('modal__dialog');
@@ -84,10 +76,10 @@ function thanksModal(message) {
         newModalDialog.remove();
         previousModal.classList.add('show');
         previousModal.classList.remove('hide');
-        closeModal();
+        closeModal('.modal');
     }, 4000);
 }
 
 }
 
-module.exports = forms;
+export default forms;

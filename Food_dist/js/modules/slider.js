@@ -1,15 +1,15 @@
-function slider() {
+function slider({container, slide, nextArrow, prevArrow, totalCounter, currentCounter, wrapper, field}) {
 
 //Slider - advanced method
 
-const slides = document.querySelectorAll('.offer__slide'), // все слайды
-slider = document.querySelector('.offer__slider'), // общий блок Slider
-next = document.querySelector('.offer__slider-next'), // кнока -->
-prev = document.querySelector('.offer__slider-prev'), // кнопка <--
-current = document.querySelector('.offer__slider-counter #current'), // номер текущего слайда
-total = document.querySelector('.offer__slider-counter #total'), // общее кол-во слайдов
-slidesWrapper = document.querySelector('.offer__slider-wrapper'), // обертка 
-slidesField = document.querySelector('.offer__slider-inner'), // поле со слайдами
+const slides = document.querySelectorAll(slide), // все слайды
+slider = document.querySelector(container), // общий блок Slider
+next = document.querySelector(nextArrow), // кнока -->
+prev = document.querySelector(prevArrow), // кнопка <--
+current = document.querySelector(currentCounter), // номер текущего слайда
+total = document.querySelector(totalCounter), // общее кол-во слайдов
+slidesWrapper = document.querySelector(wrapper), // обертка 
+slidesField = document.querySelector(field), // поле со слайдами
 width = window.getComputedStyle(slidesWrapper).width; // сколько места занимает видимый блок
 
 let slideIndex = 1; // index стартового слайда
@@ -158,5 +158,4 @@ dot.addEventListener('click', (e) => {
 });
 
 }
-
-module.exports = slider;
+export default slider;
